@@ -102,3 +102,4 @@
 /project/workspace/UnitTestProject2/obj/Debug/net8.0/UnitTestProject2.pdb
 /project/workspace/UnitTestProject2/obj/Debug/net8.0/UnitTestProject2.genruntimeconfig.cache
 /project/workspace/UnitTestProject2/obj/Debug/net8.0/ref/UnitTestProject2.dll
+/project/workspace/UnitTestProject2/obj/Debug/net8.0/UnitTestProject2.sourcelink.json
