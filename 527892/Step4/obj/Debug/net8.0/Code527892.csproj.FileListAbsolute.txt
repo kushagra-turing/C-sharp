@@ -1,0 +1,6 @@
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.csproj.AssemblyReference.cache
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.GeneratedMSBuildEditorConfig.editorconfig
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.AssemblyInfoInputs.cache
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.AssemblyInfo.cs
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.csproj.CoreCompileInputs.cache
+/project/workspace/Code527892/obj/Debug/net8.0/Code527892.sourcelink.json

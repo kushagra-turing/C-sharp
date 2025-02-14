@@ -1,0 +1,6 @@
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.csproj.AssemblyReference.cache
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.GeneratedMSBuildEditorConfig.editorconfig
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.AssemblyInfoInputs.cache
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.AssemblyInfo.cs
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.csproj.CoreCompileInputs.cache
+/project/workspace/527892/Step2/obj/Debug/net8.0/Step2.sourcelink.json

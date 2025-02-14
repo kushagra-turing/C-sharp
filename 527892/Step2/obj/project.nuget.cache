@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9GbSifXEibMrS9EYDpRX7W1m7PkR4YnGxkDX+8XjgU7B70B4uFTm3dgqSOWrf0thGEHN5wGqujLB1SQ+Rw6sMg==",
+  "success": true,
+  "projectFilePath": "/project/workspace/527892/Step2/Step2.csproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
