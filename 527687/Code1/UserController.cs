@@ -6,35 +6,39 @@ namespace UserApi.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;  // Added service layer
+        private readonly IUserService _userService;
 
-        public UserController(IUserService userService) // Use Dependency Injection
+        public UserController(IUserService userService)
         {
-            _userService = userService;
-            Console.WriteLine("Added controller");
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         [HttpGet("user/{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetUser(string id)
         {
-            var user = _userService.GetUserById(id);  // Delegate to service
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("User ID is required.");
+            }
+
+            var user = _userService.GetUserById(id);
 
             if (user == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound($"User with ID '{id}' not found.");
             }
 
-            return Ok(user); // Return 200 with user data
+            return Ok(user);
         }
 
         [HttpGet("user/profile")]
         public IActionResult GetProfile()
         {
-            var profile = _userService.GetUserProfile(); //Delegate to service
+            var profile = _userService.GetUserProfile();
 
             if (profile == null)
             {
-                return NotFound(); // or perhaps NoContent() if appropriate
+                return NotFound("User profile not found.");
             }
 
             return Ok(profile);

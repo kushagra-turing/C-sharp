@@ -1,4 +1,4 @@
-// Controllers/UserController.cs
+// UserApi/Controllers/UserController.cs
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Models;
 
@@ -8,6 +8,13 @@ namespace UserApi.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
+        // In a real application, this would come from a database or service.
+        private static readonly List<User> Users = new List<User>()
+        {
+            new User { Id = "1", Name = "John Doe", Email = "john.doe@example.com" },
+            new User { Id = "2", Name = "Jane Smith", Email = "jane.smith@example.com" }
+        };
+
         private readonly ILogger<UserController> _logger;
 
         public UserController(ILogger<UserController> logger)
@@ -15,25 +22,37 @@ namespace UserApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet("user/{id}")]
-        public IActionResult GetUser(int id)
+
+        [HttpGet("profile")]
+        public IActionResult GetProfile()
         {
-            // Simulate data retrieval based on ID
-            if (id <= 0)
+            // Assuming we want to return the profile of user with id "1"
+            var user = Users.FirstOrDefault(u => u.Id == "1");
+
+            if (user == null)
             {
-                return NotFound();
+                return NotFound("Profile not found");
             }
 
-            var user = new User { Id = id, Name = "Test User", Email = "test@example.com" };
             return Ok(user);
         }
 
-        [HttpGet("user/profile")]
-        public IActionResult GetProfile()
+        [HttpGet("{id}")]
+        public IActionResult GetUser(string id)
         {
-            // Simulate profile retrieval
-            var profile = new Profile { DisplayName = "Test User Profile", Bio = "A sample bio." };
-            return Ok(profile);
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("User ID cannot be empty.");
+            }
+
+            var user = Users.FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound($"User with ID '{id}' not found.");
+            }
+
+            return Ok(user);
         }
     }
 }

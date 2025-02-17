@@ -3,7 +3,7 @@ namespace UserApi.Services
 {
     public interface IUserService
     {
-        User? GetUserById(int id);
+        User? GetUserById(string id);
         UserProfile? GetUserProfile();
     }
 }

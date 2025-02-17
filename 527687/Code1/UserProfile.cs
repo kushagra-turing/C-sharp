@@ -1,11 +1,10 @@
 // UserProfile.cs
-using System.Collections.Generic;
-
-namespace UserApi
+namespace UserApi.Models
 {
     public class UserProfile
     {
-        public string? Bio { get; set; }
-        public List<string>? Interests { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? City { get; set; }
     }
 }
