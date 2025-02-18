@@ -1,0 +1,6 @@
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.csproj.AssemblyReference.cache
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.GeneratedMSBuildEditorConfig.editorconfig
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.AssemblyInfoInputs.cache
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.AssemblyInfo.cs
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.csproj.CoreCompileInputs.cache
+/project/workspace/528008/Step1/UnitTest/obj/Debug/net8.0/UnitTest.sourcelink.json

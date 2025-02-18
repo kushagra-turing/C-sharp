@@ -1,0 +1,13 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions.Generator-4.6.0",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "orchestrationTrigger",
+      "name": "context"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/Code.dll",
+  "entryPoint": "DurableOrchestrationExample.OrchestratorFunctions.RunOrchestrator"
+}
