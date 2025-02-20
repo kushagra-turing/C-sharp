@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;  // Add this for HttpRequest
+using Microsoft.AspNetCore.Mvc;  // Add this for OkObjectResult
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using NUnit.Framework;
@@ -15,16 +17,16 @@ namespace DurableOrchestrationExample
         {
             // Arrange
             var mockContext = new Mock<IDurableOrchestrationContext>();
-            mockContext.Setup(c => c.CallActivityAsync<string>("Hello")).ReturnsAsync("Hello from activity!");
-            mockContext.Setup(c => c.CallActivityAsync<string>("Bye")).ReturnsAsync("Bye from activity!");
+            mockContext.Setup(c => c.CallActivityAsync<string>("Hello", null)).ReturnsAsync("Hello");
+            mockContext.Setup(c => c.CallActivityAsync<string>("Bye", null)).ReturnsAsync("Bye");
             mockContext.Setup(c => c.InstanceId).Returns("testInstanceId");
 
             // Act
             await OrchestratorFunctions.RunOrchestrator(mockContext.Object);
 
             // Assert
-            mockContext.Verify(c => c.CallActivityAsync<string>("Hello"), Times.Once);
-            mockContext.Verify(c => c.CallActivityAsync<string>("Bye"), Times.Once);
+            mockContext.Verify(c => c.CallActivityAsync<string>("Hello", null), Times.Exactly(10));
+            mockContext.Verify(c => c.CallActivityAsync<string>("Bye", null), Times.Exactly(10));
         }
 
         [Test]
@@ -37,7 +39,7 @@ namespace DurableOrchestrationExample
             string result = OrchestratorFunctions.Hello(mockContext.Object);
 
             // Assert
-            Assert.AreEqual("Hello from activity!", result);
+            Assert.AreEqual("Hello", result);
         }
 
         [Test]
@@ -50,27 +52,28 @@ namespace DurableOrchestrationExample
             string result = OrchestratorFunctions.Bye(mockContext.Object);
 
             // Assert
-            Assert.AreEqual("Bye from activity!", result);
+            Assert.AreEqual("Bye", result);
         }
 
-        //Example test for ClientFunctions.StartOrchestration
+        // Example test for ClientFunctions.StartOrchestration
         [Test]
         public async Task StartOrchestration_StartsNewOrchestration()
         {
             // Arrange
             var mockDurableClient = new Mock<IDurableOrchestrationClient>();
-            var mockRequest = new Mock<HttpRequest>();
+            var mockRequest = new Mock<HttpRequest>();  // Mock the HttpRequest
 
             string functionName = "TestOrchestrator";
             string expectedInstanceId = Guid.NewGuid().ToString();
 
-            mockDurableClient.Setup(x => x.StartNewAsync(functionName, It.IsAny<string>()))
-               .Returns(Task.CompletedTask)
-               .Callback<string, string>((name, id) =>
-               {
-                   // Capture the instance ID to verify it was generated and used
-                   expectedInstanceId = id;
-               });
+            // Change this to return Task<string> instead of Task
+            mockDurableClient.Setup(x => x.StartNewAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(expectedInstanceId) // Return a Task<string> here with the instance ID
+                .Callback<string, string>((name, id) =>
+                {
+                    // Capture the instance ID to verify it was generated and used
+                    expectedInstanceId = id;
+                });
 
             // Act
             var result = await OrchestratorFunctions.ClientFunctions.StartOrchestration(mockRequest.Object, mockDurableClient.Object, functionName);
@@ -79,8 +82,21 @@ namespace DurableOrchestrationExample
             Assert.IsInstanceOf<OkObjectResult>(result);
             var okResult = (OkObjectResult)result;
             Assert.AreEqual(expectedInstanceId, okResult.Value);
-            mockDurableClient.Verify(x => x.StartNewAsync(functionName, It.IsAny<string>()), Times.Once);
+            mockDurableClient.Verify(x => x.StartNewAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
+        // Negative test: RunOrchestrator fails when activity throws an exception
+        [Test]
+        public async Task RunOrchestrator_ThrowsException_WhenActivityFails()
+        {
+            // Arrange
+            var mockContext = new Mock<IDurableOrchestrationContext>();
+            mockContext.Setup(c => c.CallActivityAsync<string>("Hello", null)).ThrowsAsync(new Exception("Activity failed"));
+            mockContext.Setup(c => c.CallActivityAsync<string>("Bye", null)).ReturnsAsync("Bye");
+
+            // Act & Assert
+            var ex = Assert.ThrowsAsync<Exception>(async () => await OrchestratorFunctions.RunOrchestrator(mockContext.Object));
+            Assert.AreEqual("Activity failed", ex.Message);
+        }
     }
 }

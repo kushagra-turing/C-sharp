@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/project/workspace/528008/Step3/UnitTest/UnitTest.csproj": {}
+    "/project/workspace/528008/Ideal/UnitTest/UnitTest.csproj": {}
   },
   "projects": {
-    "/project/workspace/528008/Step3/Code/Code.csproj": {
+    "/project/workspace/528008/Ideal/Code/Code.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/project/workspace/528008/Step3/Code/Code.csproj",
+        "projectUniqueName": "/project/workspace/528008/Ideal/Code/Code.csproj",
         "projectName": "Code",
-        "projectPath": "/project/workspace/528008/Step3/Code/Code.csproj",
+        "projectPath": "/project/workspace/528008/Ideal/Code/Code.csproj",
         "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/project/workspace/528008/Step3/Code/obj/",
+        "outputPath": "/project/workspace/528008/Ideal/Code/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
@@ -47,6 +47,18 @@
               "target": "Package",
               "version": "[2.3.0, )"
             },
+            "Microsoft.Azure.Functions.Worker": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
+            "Microsoft.Azure.Functions.Worker.Extensions.DurableTask": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Azure.WebJobs.Extensions": {
+              "target": "Package",
+              "version": "[3.0.6, )"
+            },
             "Microsoft.Azure.WebJobs.Extensions.DurableTask": {
               "target": "Package",
               "version": "[3.0.3, )"
@@ -80,14 +92,14 @@
         }
       }
     },
-    "/project/workspace/528008/Step3/UnitTest/UnitTest.csproj": {
+    "/project/workspace/528008/Ideal/UnitTest/UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/project/workspace/528008/Step3/UnitTest/UnitTest.csproj",
+        "projectUniqueName": "/project/workspace/528008/Ideal/UnitTest/UnitTest.csproj",
         "projectName": "UnitTest",
-        "projectPath": "/project/workspace/528008/Step3/UnitTest/UnitTest.csproj",
+        "projectPath": "/project/workspace/528008/Ideal/UnitTest/UnitTest.csproj",
         "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/project/workspace/528008/Step3/UnitTest/obj/",
+        "outputPath": "/project/workspace/528008/Ideal/UnitTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
@@ -102,8 +114,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/project/workspace/528008/Step3/Code/Code.csproj": {
-                "projectPath": "/project/workspace/528008/Step3/Code/Code.csproj"
+              "/project/workspace/528008/Ideal/Code/Code.csproj": {
+                "projectPath": "/project/workspace/528008/Ideal/Code/Code.csproj"
               }
             }
           }

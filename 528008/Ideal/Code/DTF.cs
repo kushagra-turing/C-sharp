@@ -22,7 +22,7 @@ namespace DurableOrchestrationExample
             {
                 string resultHello = await context.CallActivityAsync<string>("Hello", null);
                 string resultBye = await context.CallActivityAsync<string>("Bye", null);
-                await context.CreateTimer(context.CurrentUtcDateTime.AddSeconds(1), CancellationToken.None);
+                await Task.Delay(1000);
             }
             Console.WriteLine($"Orchestration completed: {context.InstanceId}");
         }
@@ -39,16 +39,6 @@ namespace DurableOrchestrationExample
         {
             Console.WriteLine("Bye");
             return "Bye";
-        }
-
-        [FunctionName("TimerStarter")]
-        public static async Task TimerStarter(
-            [TimerTrigger("0 */1 * * * *")] TimerInfo timerInfo, // Every minute. Adjust as needed for testing.
-            [DurableClient] IDurableOrchestrationClient starter)
-        {
-            string instanceId = Guid.NewGuid().ToString();
-            Console.WriteLine($"Starting orchestration with ID = '{instanceId}'.");
-            await starter.StartNewAsync("RunOrchestrator", instanceId);
         }
 
         public static class ClientFunctions
